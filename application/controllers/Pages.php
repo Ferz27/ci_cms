@@ -1,9 +1,11 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pages extends CI_Controller
 {
 	public function view($page = 'home')
 	{
+		$this->load->helper('url');
 		//проверка существования файла страницы
 		if (!file_exists(APPPATH.'/views/pages/'.$page.'.php'))
 		{   //выводим 404 ошбку если страницы нет
