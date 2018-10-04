@@ -1,1 +1,1 @@
-<h1><?php echo $title; ?></h1>
+<h2>This HOme page</h2>

@@ -1,4 +1,37 @@
+*{
+    font-family: sans-serif;
+}
+html{
+    height:100%;
+}
 body{
-    margin: 0;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.container{
+    width: 980px;
+    margin: 0 auto;
+}
+header{
+    padding: 10px;
+    flex: 0 0 auto;
+    height: 100px;
+    background: #123357;
+    color: #FFF;
+}
+main{
+    box-shadow: 0 0 28px 6px rgba(5, 5, 5, 0.15);
+    flex: 1 0 auto;
+    width: 980px;
+    margin: 10px auto;
+    border-radius: 3px;
+}
+footer{
+    padding: 10px;
+    height: 100px;
+    background: #07111d;
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    color: #FFF;
 }
