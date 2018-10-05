@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pages extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('pages_model');
+	}
+
+	public function index()
+	{
+		$data['page'] = $this->pages_model->get_page();
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/page', $data);
+		$this->load->view('templates/footer', $data);
+	}
+
 	public function view($page = 'home')
 	{
 		$this->load->helper('url');
