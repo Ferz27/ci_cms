@@ -9,9 +9,11 @@ class Pages extends CI_Controller
 		$this->load->model('pages_model');
 	}
 
-	public function index()
+	public function index($page = 'home')
 	{
-		$data['page'] = $this->pages_model->get_page();
+		$data['page'] = $this->pages_model->get_page($page);
+		$data['title'] = $data['page']['page_title'];
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/page', $data);
 		$this->load->view('templates/footer', $data);

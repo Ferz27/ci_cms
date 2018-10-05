@@ -15,7 +15,7 @@ class pages_model extends CI_Model
 			return $query->result_array();
 		}
 
-		$query = $this->db->get_where('page', array('slug' => $slug));
+		$query = $this->db->get_where('pages', array('page_slug' => $slug));
 		return $query->row_array();
 	}
 
