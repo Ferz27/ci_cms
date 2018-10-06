@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pages extends CI_Controller
 {
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -11,27 +12,46 @@ class Pages extends CI_Controller
 
 	public function index($page = 'home')
 	{
-		$data['page'] = $this->pages_model->get_page($page);
-		$data['title'] = $data['page']['page_title'];
+		$this->output->enable_profiler(TRUE);
 
+		$data = $this->pages_model->get_page($page);
+		if ($data == null){
+			show_404();
+		}
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/page', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
-	public function view($page = 'home')
+	public function create()
 	{
-		$this->load->helper('url');
-		//проверка существования файла страницы
-		if (!file_exists(APPPATH.'/views/pages/'.$page.'.php'))
-		{   //выводим 404 ошбку если страницы нет
-			show_404();
+		$this->load->helper('rus2translit');
+		$this->output->enable_profiler(TRUE);
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$data['title'] = 'Создание новой страницы';
+
+		$this->form_validation->set_rules('title', 'Title', 'required');
+		$this->form_validation->set_rules('text', 'text', 'required');
+
+		if ($this->form_validation->run() === FALSE)
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/create');
+			$this->load->view('templates/footer');
+
 		}
+		else
+		{
+			$this->pages_model->set_pages();
 
-		$data['title'] = ucfirst($page);    //Первая буква с большой буквы
+			$data['text'] = 'Страница успешна создана';
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/'.$page, $data);
-		$this->load->view('templates/footer', $data);
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/page', $data);
+			$this->load->view('templates/footer');
+		}
 	}
 }

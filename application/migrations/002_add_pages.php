@@ -33,11 +33,11 @@ class Migration_Add_pages extends CI_Migration
 			),
 		));
 		$this->dbforge->add_key('page_id', true);
-		$this->dbforge->create_table('pages');
+		$this->dbforge->create_table('Pagesclass');
 	}
 
 	public function down()
 	{
-		$this->dbforge->drop_table('pages');
+		$this->dbforge->drop_table('Pagesclass');
 	}
 }
