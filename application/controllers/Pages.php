@@ -33,7 +33,7 @@ class Pages extends CI_Controller
 
 		$data['title'] = 'Создание новой страницы';
 
-		$this->form_validation->set_rules('title', 'Title', 'required');
+		$this->form_validation->set_rules('title', 'Title', 'required|callback_slug_check');
 		$this->form_validation->set_rules('text', 'text', 'required');
 
 		if ($this->form_validation->run() === FALSE)
@@ -52,6 +52,20 @@ class Pages extends CI_Controller
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/page', $data);
 			$this->load->view('templates/footer');
+		}
+	}
+
+	public function slug_check($slug)
+	{
+		$this->load->helper('rus2translit');
+		if ($this->pages_model->valid_slug($slug) == FALSE)
+		{
+			$this->form_validation->set_message('slug_check', 'Заголовок с названием "{field}" уже существует, пожалуйста введите другое');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
 		}
 	}
 }

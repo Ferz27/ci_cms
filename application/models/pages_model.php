@@ -27,8 +27,18 @@ class pages_model extends CI_Model
 			'slug' => mb_strtolower(rus2translit($slug)),
 			'text' => $this->input->post('text')
 		);
-
 		return $this->db->insert('pages', $data);
+	}
+	//проверка есть ли такая страница в бд
+	function valid_slug($sl)
+	{
+		$slug = mb_strtolower(rus2translit($sl));//приводим slug в нжиний регистор и меняем кирилицу на латиницу
+		$query = $this->db->get_where('Pages', array('slug' => $slug));//запрашиваем из бд странци с таким slug
+		if(!empty($query->row_array()))
+		{
+			return FALSE;
+		}
+		return TRUE;
 	}
 
 }
