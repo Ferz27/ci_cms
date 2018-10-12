@@ -4,6 +4,7 @@ class pages_model extends CI_Model
 {
 	public function __construct()
 	{
+		parent::__construct();
 		$this->load->database();
 	}
 
@@ -14,7 +15,6 @@ class pages_model extends CI_Model
 			$query = $this->db->get('Pages');
 			return $query->result_array();
 		}
-
 		$query = $this->db->get_where('Pages', array('slug' => $slug));
 		return $query->row_array();
 	}

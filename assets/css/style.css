@@ -9,6 +9,30 @@ body{
     flex-direction: column;
     height: 100%;
 }
+form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+}
+input[type='input'], textarea{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #777;
+}
+input[type='submit']{
+    align-self: flex-end;
+    background-color: green;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+input[type='submit']:hover, input[type='submit']:focus{
+    background-color: darkgreen;
+}
 .container{
     width: 980px;
     margin: 0 auto;

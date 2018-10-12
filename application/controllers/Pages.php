@@ -8,13 +8,16 @@ class Pages extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('pages_model');
+		$this->load->model('navigations_model');
 	}
 
 	public function index($page = 'home')
 	{
 		$this->output->enable_profiler(TRUE);
 
+
 		$data = $this->pages_model->get_page($page);
+		$data['nav'] = $this->navigations_model->getNav();
 		if ($data == null){
 			show_404();
 		}
@@ -32,6 +35,7 @@ class Pages extends CI_Controller
 		$this->load->library('form_validation');
 
 		$data['title'] = 'Создание новой страницы';
+		$data['nav'] = $this->navigations_model->getNav();
 
 		$this->form_validation->set_rules('title', 'Title', 'required|callback_slug_check');
 		$this->form_validation->set_rules('text', 'text', 'required');
@@ -48,6 +52,8 @@ class Pages extends CI_Controller
 			$this->pages_model->set_pages();
 
 			$data['text'] = 'Страница успешна создана';
+
+			$data['nav'] = $this->navigations_model->getNav();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/page', $data);

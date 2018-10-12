@@ -13,4 +13,10 @@
 <header>
     <p class="container">This is HEADER!</p>
 </header>
+<nav>
+    <?php foreach ($nav as $name => $href){ ?>
+    <a href="<?php echo base_url().$href; ?>"><?php echo $name; ?></a>
+    <?php }; ?>
+
+</nav>
 <main>
